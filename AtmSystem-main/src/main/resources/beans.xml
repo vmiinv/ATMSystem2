@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="bankService" class="com.system.atm.service.impl.BankService"
+        init-method="init" destroy-method="destroy">
+    </bean>
+
+    <bean id="card" class="com.system.atm.model.Card" scope="prototype">
+        <property name="cardNumber" value="card number"></property>
+        <property name="balance" value="0"></property>
+        <property name="cvv" value="cvv"></property>
+        <property name="expireDate" value="expire date"></property>
+        <property name="pin" value="pin"></property>
+    </bean>
+    <bean id="account" class="com.system.atm.model.Account" scope="prototype">
+        <property name="username" value="name"></property>
+        <property name="password" value="password"></property>
+        <property name="email" value="email"></property>
+        <property name="card" ref="card"></property>
+    </bean>
+    <bean id="bank" class="com.system.atm.model.Bank" scope="prototype">
+        <property name="clients">
+            <list>
+                <ref bean="account"/>
+            </list>
+        </property>
+        <property name="city" value="city"></property>
+        <property name="country" value="country"></property>
+        <property name="postalCode" value="postal code"></property>
+    </bean>
+</beans>
